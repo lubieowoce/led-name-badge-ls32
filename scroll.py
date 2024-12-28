@@ -42,16 +42,19 @@ if direction == 'down':
             for y in range(0, ih - HEIGHT + 1)
         )
     )
+
 elif direction == 'right':
     if iw <= WIDTH:
         raise Exception(f'Image too narrow ({iw}px), nothing to scroll')
-    res = reduce(
-        merge_horizontal,
-        (
-            extend(im.crop((x, 0, x + WIDTH, HEIGHT)), (ANIM_WIDTH, HEIGHT))
-            for x in range(0, iw - WIDTH + 1)
-        )
-    )
+    res = None
+    for x in range(0, iw - WIDTH + 1):
+        im.seek(x % im.n_frames)
+        frame = extend(im.crop((x, 0, x + WIDTH, HEIGHT)),
+                       (ANIM_WIDTH, HEIGHT))
+        if res == None:
+            res = frame
+        else:
+            res = merge_horizontal(res, frame)
 else:
     raise Exception(f'Invalid direction: {direction}')
 
