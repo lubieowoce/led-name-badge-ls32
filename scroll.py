@@ -1,4 +1,5 @@
 from PIL import Image
+import os
 import sys
 from functools import reduce
 
@@ -6,6 +7,9 @@ _, direction, file, out_file = sys.argv
 # file = sys.argv[1]
 # out_file = sys.argv[2]
 im = Image.open(file)
+
+offset_str = os.environ.get('OFFSET', None)
+offset = int(offset_str) if offset_str is not None else 0
 
 WIDTH = 44
 ANIM_WIDTH = 48  # not
@@ -33,8 +37,8 @@ def merge_horizontal(im1: Image.Image, im2: Image.Image) -> Image.Image:
 
 
 if direction == 'down':
-    if ih <= HEIGHT:
-        raise Exception(f'Image too short ({ih}px), nothing to scroll')
+    # if ih <= HEIGHT:
+    #     raise Exception(f'Image too short ({ih}px), nothing to scroll')
     res = reduce(
         merge_horizontal,
         (
@@ -44,12 +48,22 @@ if direction == 'down':
     )
 
 elif direction == 'right':
-    if iw <= WIDTH:
-        raise Exception(f'Image too narrow ({iw}px), nothing to scroll')
+    # if iw <= WIDTH:
+    #     raise Exception(f'Image too narrow ({iw}px), nothing to scroll')
     res = None
     for x in range(0, iw - WIDTH + 1):
         im.seek(x % im.n_frames)
         frame = extend(im.crop((x, 0, x + WIDTH, HEIGHT)),
+                       (ANIM_WIDTH, HEIGHT))
+        if res == None:
+            res = frame
+        else:
+            res = merge_horizontal(res, frame)
+elif direction == 'left-loop':
+    res = None
+    for x in range(-offset, iw + 1):
+        im.seek(x % im.n_frames)
+        frame = extend(im.crop((-x, 0, -x + WIDTH, HEIGHT)),
                        (ANIM_WIDTH, HEIGHT))
         if res == None:
             res = frame
