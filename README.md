@@ -1,3 +1,24 @@
+# Custom scripts!
+
+Remember to use mode 5 for animations!
+
+### GIF
+
+```shell
+# turn a gif into something uploadable
+python ./from_gif.py "my/input/file.gif" "out.png";
+python ./led-badge-11x44.py -s7 -m5 "out.png"
+```
+
+### Scroll an image
+
+Supported modces: right/down. Can also scroll an animated gif
+
+```shell
+python ./scroll.py right "my-wide-file.png" "out.png"
+python ./led-badge-11x44.py -s7 -m5 "out.png"
+```
+
 # Led-Badge-44x11
 
 Upload tool for a LED name tag with USB-HID interface
@@ -52,7 +73,7 @@ access to the badge via USB.
 
 Using a venv will allow to use pip to install dependencies without the danger
 that the installed modules will interfere with the system installed ones.
-On some systems (esp. those with Python 2 *and* 3 installed), you have to
+On some systems (esp. those with Python 2 _and_ 3 installed), you have to
 address Python 3 explicitly by using the commands `python3` / `pip3` instead
 of `python` / `pip`.
 
@@ -84,7 +105,7 @@ library to the needed place, e.g.
 
 ### Required dependencies on Mac Systems
 
-On some systems (esp. those with Python 2 *and* 3 installed), you have to
+On some systems (esp. those with Python 2 _and_ 3 installed), you have to
 address Python 3 explicitly by using the command `pip3` instead of `pip`.
 
     sudo easy_install pip
@@ -102,11 +123,11 @@ in a quite low level way and in a quite old version:
 - Please use version 1.2.6.0 of 'libusb-win32`. It's still available on the
   [old project repo on SourceForge](https://sourceforge.net/projects/libusb-win32/files/libusb-win32-releases/1.2.6.0/)
 - Then
-    - Extract the downloaded zip file and go to the directory `libusb-win32-bin-1.2.6.0\bin`
-    - Right click on `inf-wizard.exe` and `Run as Administrator`
-    - `Next` -> Select `0x0416 0x5020 LS32 Custm HID` (or similar with the same IDs)
-    - `Next` -> `Next` -> Save as dialog `LS32_Sustm_HID.inf` -> `Save` (just to proceed, we don't need that file)
-    - `Install Now...` -> Driver Install Complete -> `OK`
+  - Extract the downloaded zip file and go to the directory `libusb-win32-bin-1.2.6.0\bin`
+  - Right click on `inf-wizard.exe` and `Run as Administrator`
+  - `Next` -> Select `0x0416 0x5020 LS32 Custm HID` (or similar with the same IDs)
+  - `Next` -> `Next` -> Save as dialog `LS32_Sustm_HID.inf` -> `Save` (just to proceed, we don't need that file)
+  - `Install Now...` -> Driver Install Complete -> `OK`
 
 There are other - meanwhile recommended, but untested here - ways to install and setup
 newer versions of `libusb-win32`: use
@@ -117,15 +138,10 @@ or [libusbK](https://libusbk.sourceforge.net/UsbK3/index.html)
 Of course, Python is needed:
 
 - Download latest python from [python.org](https://www.python.org/downloads/),
-or specific versions from [here](https://www.python.org/downloads/windows/)
-    - Checkmark the following options
-        - `[x]` install Launcher for all Users
-        - `[x]` Add Python X.Y to PATH
-    - Click the `Install Now ...` text message.
-    - Optionally click on the 'Disable path length limit' text message. This is always a good thing to do.
+  or specific versions from [here](https://www.python.org/downloads/windows/) - Checkmark the following options - `[x]` install Launcher for all Users - `[x]` Add Python X.Y to PATH - Click the `Install Now ...` text message. - Optionally click on the 'Disable path length limit' text message. This is always a good thing to do.
 
 Install needed the Python packages. On some systems (esp. those with Python 2
-*and* 3 installed), you have to address Python 3 explicitly by using the
+_and_ 3 installed), you have to address Python 3 explicitly by using the
 command `pip3` instead of `pip`.
 
 - Run cmd.exe as Administrator, enter:
@@ -140,7 +156,7 @@ the USB device or install a udev rule as stated above. On Windows, maybe you
 have to run the `cmd.exe`, where you enter the commands, with `Run as administrator`,
 which is similar to the `sudo`on linux.
 
-On some systems (esp. those with Python 2 *and* 3 installed), you have to
+On some systems (esp. those with Python 2 _and_ 3 installed), you have to
 address Python 3 explicitly by using `python3` instead of `python`. Run
 `python -V` to see which version of python is configured as default.
 
@@ -302,7 +318,7 @@ write method. Also, they can change between computer startups or reconnects.
 
 ### Animations
 
-See the gfx/starfield folder for examples. An animation of N frames is provided as an image N*48 pixels wide,
+See the gfx/starfield folder for examples. An animation of N frames is provided as an image N\*48 pixels wide,
 for both 48 and 44 pixel wide devices.
 
 ## Usage as module
@@ -319,9 +335,9 @@ the device.
 The method `header()` takes a number of parameters:
 
 - up to 8 lengths as a tuple of numbers
-    - each length is the number of byte-columns for the corresponding bitmap data, that is the number of bytes of the
-      corresponding bitmap data divided by 11 (for the 11x44 devices) respective 12 (for the 12x48-devices), where one
-      byte is 8 pixels wide.
+  - each length is the number of byte-columns for the corresponding bitmap data, that is the number of bytes of the
+    corresponding bitmap data divided by 11 (for the 11x44 devices) respective 12 (for the 12x48-devices), where one
+    byte is 8 pixels wide.
 - arguments comparable to the command line arguments: up to 8 speeds, modes, blink-flags, ants-flags each as tuple of
   numbers, and an (optional) brightness as number.
 - Optionally, you can give a timestamp as datetime. It is written to the device as part of the header, but not visible
@@ -398,7 +414,6 @@ which id. Esp. after a reconnect or restart, the ids may change or exchange. If 
 only one device to a bus. So you can decide by bus number. Or keep a specific connect order (while the computer is
 already running), then you can decide by device number. Maybe the hidapi method is a bit more reliable. You have
 to experiment a bit.
- 
 
 ### Using the text generation
 
@@ -440,7 +455,7 @@ LedNameBadge.write(buf)
 
 ### Generating Plantuml graphics
 
-You will need PlantUML and potentially GraphViz dot to generate the diagrams from the *.puml files.
+You will need PlantUML and potentially GraphViz dot to generate the diagrams from the \*.puml files.
 
 Just run `plantuml "*.puml"` from the `photos` directory to regenerate all diagrams.
 
@@ -450,9 +465,9 @@ Run `python run_tests.py` from the `tests` directory.
 
 ## Related References (for USB-Serial devices)
 
-* https://github.com/Caerbannog/led-mini-board
-* http://zunkworks.com/projects/programmablelednamebadges/ (Offline since 2019. As of 07-2024, it is still available on https://web.archive.org)
-* https://github.com/DirkReiners/LEDBadgeProgrammer
-* https://bitbucket.org/bartj/led/src
-* http://www.daveakerman.com/?p=1440
-* https://github.com/stoggi/ledbadge
+- https://github.com/Caerbannog/led-mini-board
+- http://zunkworks.com/projects/programmablelednamebadges/ (Offline since 2019. As of 07-2024, it is still available on https://web.archive.org)
+- https://github.com/DirkReiners/LEDBadgeProgrammer
+- https://bitbucket.org/bartj/led/src
+- http://www.daveakerman.com/?p=1440
+- https://github.com/stoggi/ledbadge
