@@ -5,7 +5,7 @@ from functools import reduce
 
 _, file, out_file = sys.argv
 should_invert = bool(os.environ.get('INVERT', ''))
-background = bool(os.environ.get('BACKGROUND', ''))
+background = os.environ.get('BACKGROUND', '')
 # file = sys.argv[1]
 # out_file = sys.argv[2]
 im = Image.open(file)
