@@ -1,0 +1,3 @@
+- [cat.png](./cat.png): from https://www.pngegg.com/en/png-ztxqv
+- [running-cat-2-cropped.gif](./running-cat-2-cropped.gif): from https://elthen.itch.io/2d-pixel-art-cat-sprites
+- [longcat-dark-anim.gif](./longcat-dark-anim.gif): based on https://www.pngegg.com/en/png-ztxqv
